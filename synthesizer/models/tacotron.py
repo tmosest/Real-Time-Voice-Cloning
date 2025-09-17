@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from pathlib import Path
 from typing import Union
+import _pickle
 
 
 class HighwayNetwork(nn.Module):
@@ -493,7 +494,12 @@ class Tacotron(nn.Module):
     def load(self, path, optimizer=None):
         # Use device of model params as location for loaded state
         device = next(self.parameters()).device
-        checkpoint = torch.load(str(path), map_location=device)
+        if not path.is_file():
+            raise FileNotFoundError(f"Model file not found at {path}")
+        try:
+            checkpoint = torch.load(str(path), map_location=device, weights_only=False)
+        except _pickle.UnpicklingError as e:
+            raise RuntimeError(f"Error loading model checkpoint from {path}. It might be corrupted or not a valid PyTorch model file. Original error: {e}") from e
         self.load_state_dict(checkpoint["model_state"])
 
         if "optimizer_state" in checkpoint and optimizer is not None:

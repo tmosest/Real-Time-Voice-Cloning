@@ -8,7 +8,10 @@ SV2TTS is a deep learning framework in three stages. In the first stage, one cre
 
 [![Toolbox demo](https://i.imgur.com/8lFUlgz.png)](https://www.youtube.com/watch?v=-O_hYhToKoA)
 
-
+```
+python3.9 -m venv .venv
+source .venv/bin/activate
+```
 
 ### Papers implemented  
 | URL | Designation | Title | Implementation source |
