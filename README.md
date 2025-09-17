@@ -13,6 +13,58 @@ python3.9 -m venv .venv
 source .venv/bin/activate
 ```
 
+Manual Download from:
+
+https://drive.google.com/drive/folders/1fU6umc5uQAVR2udZdHX-lDgXYzTyqG_j
+
+```
+1. Install Homebrew (if you don't have it):
+Homebrew is a package manager for macOS and is used to easily install pyenv. Open your Terminal and run:
+Code
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2. Install pyenv:
+Once Homebrew is installed, install pyenv:
+Code
+
+brew install pyenv
+3. Configure pyenv in your shell:
+Add pyenv to your shell's initialization file (e.g., ~/.zshrc for Zsh, or ~/.bash_profile for Bash). This example uses Zsh:
+Code
+
+echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+source ~/.zshrc
+4. Install specific Python versions:
+You can now install any desired Python version using pyenv install. First, list available versions:
+Code
+
+pyenv install -l
+Then, install a specific version (e.g., 3.9.1):
+Code
+
+pyenv install 3.9.1
+5. Switch between Python versions:
+Globally: Set a default Python version for all your shell sessions:
+Code
+
+  pyenv global 3.9.1
+Locally (per project): Set a specific Python version for a particular directory or project:
+Code
+
+  cd my_project_directory
+  pyenv local 3.9.1
+Temporarily (current shell session): Set a specific Python version for the current terminal session:
+Code
+
+  pyenv shell 3.9.1
+6. Verify the active Python version:
+Code
+
+python --version
+which python
+```
+
 ### Papers implemented  
 | URL | Designation | Title | Implementation source |
 | --- | ----------- | ----- | --------------------- |

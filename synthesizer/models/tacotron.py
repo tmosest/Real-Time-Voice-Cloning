@@ -499,7 +499,9 @@ class Tacotron(nn.Module):
         try:
             checkpoint = torch.load(str(path), map_location=device, weights_only=False)
         except _pickle.UnpicklingError as e:
-            raise RuntimeError(f"Error loading model checkpoint from {path}. It might be corrupted or not a valid PyTorch model file. Original error: {e}") from e
+            raise RuntimeError(f"Error loading model checkpoint from {path}. This can happen if the file is corrupted, incomplete, or not a valid PyTorch model file. Please ensure you have downloaded the correct and complete model checkpoint. Original error: {e}") from e
+        except EOFError as e:
+            raise RuntimeError(f"Error loading model checkpoint from {path}. The file appears to be incomplete or corrupted. Please re-download the model checkpoint. Original error: {e}") from e
         self.load_state_dict(checkpoint["model_state"])
 
         if "optimizer_state" in checkpoint and optimizer is not None:
